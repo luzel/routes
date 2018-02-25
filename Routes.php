@@ -55,6 +55,11 @@ class Routes {
 		if (!isset($upstatement_routes->router)) {
 			$upstatement_routes->router = new AltoRouter();
 			$site_url = get_bloginfo('url');
+			
+			// fix for WPML and WP multisite when GET param used as lang
+			$url_arr = explode("?", $site_url);
+			$site_url = rtrim($url_arr[0], '/');
+
 			$site_url_parts = explode('/', $site_url);
 			$site_url_parts = array_slice($site_url_parts, 3);
 			$base_path = implode('/', $site_url_parts);
